@@ -1,8 +1,9 @@
-def censor_and_alert(text, *words):
+
+def censor_and_alert(text, *words, replace_pattern="*", alert_threshold=5):
     for word in words:
-        text = text.replace(word, "*"*len(word))
-        if (text.count("*") > 5):
-            print("More than five *")
+        text = text.replace(word, replace_pattern*len(word))
+        if (text.count(replace_pattern) > alert_threshold):
+            print(f"More than {alert_threshold} {replace_pattern}")
     return text
    
 if __name__ == "__main__":
@@ -15,6 +16,6 @@ He is a silent guardian, a watchful protector... a dark knight."""
 
     # TODO: 4. Consider general usage
 
-    text = censor_and_alert(text, word1, word2)
+    text = censor_and_alert(text, word1, word2, replace_pattern="-")
     
     print(text)
